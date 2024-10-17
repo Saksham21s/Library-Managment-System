@@ -29,13 +29,9 @@ if(strlen($_SESSION['login'])==0) {
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>Online Library Management System | My Profile</title>
-    <!-- BOOTSTRAP CORE STYLE  -->
     <link href="assets/css/bootstrap.css" rel="stylesheet" />
-    <!-- FONT AWESOME STYLE  -->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
-    <!-- CUSTOM STYLE  -->
     <link href="assets/css/style.css" rel="stylesheet" />
-    <!-- GOOGLE FONT -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' /> 
 
     <style>
@@ -50,19 +46,14 @@ if(strlen($_SESSION['login'])==0) {
             display: flex;
             justify-content: center;
             align-items: center;
-        
         }
         .panel {
             border-radius: 10px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             background-color: #ffffff;
-            transition: transform 0.3s;
             width: 90%;
-            max-width: 500px; /* Make the card smaller */
-            margin: auto; /* Centering the card */
-        }
-        .panel:hover {
-            transform: translateY(-5px) scale(1.02); /* 3D lift effect on hover */
+            max-width: 500px;
+            margin: auto;
         }
         .panel-heading {
             background-color: #007bff;
@@ -71,7 +62,6 @@ if(strlen($_SESSION['login'])==0) {
             border-radius: 10px 10px 0 0;
             text-align: center;
             font-size: 24px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
         .panel-body {
             padding: 30px;
@@ -79,32 +69,28 @@ if(strlen($_SESSION['login'])==0) {
         .form-group {
             margin-bottom: 20px;
         }
-        label {
-            font-weight: bold;
-            color: #333;
+        .form-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .form-row > div {
+            width: 48%;
         }
         .form-control {
             border: 1px solid #ccc;
             border-radius: 5px;
-            box-shadow: none;
             transition: border-color 0.3s;
         }
         .form-control:focus {
             border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
-            padding: 10px 20px;
             border-radius: 5px;
-            font-size: 16px;
-            transition: background-color 0.3s, transform 0.3s;
-        }
-        .btn-primary:hover {
-            background-color: #0056b3;
-            border-color: #0056b3;
-            transform: scale(1.05); /* Button enlargement effect on hover */
+            display: block;
+            margin: 20px auto 0;
         }
         .status-active {
             color: green;
@@ -117,9 +103,7 @@ if(strlen($_SESSION['login'])==0) {
     </style>
 </head>
 <body>
-    <!------MENU SECTION START-->
     <?php include('includes/header.php');?>
-    <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
             <div class="row pad-botm">
@@ -145,29 +129,29 @@ if(strlen($_SESSION['login'])==0) {
                                 if ($query->rowCount() > 0) {
                                     foreach ($results as $result) { 
                                 ?>  
-                                <div class="form-group">
-                                    <label>Student ID:</label>
-                                    <p><?php echo htmlentities($result->StudentId); ?></p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Student ID:</label>
+                                        <p><?php echo htmlentities($result->StudentId); ?></p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Reg Date:</label>
+                                        <p><?php echo htmlentities($result->RegDate); ?></p>
+                                    </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>Reg Date:</label>
-                                    <p><?php echo htmlentities($result->RegDate); ?></p>
-                                </div>
-                                <?php if ($result->UpdationDate != "") { ?>
+                                <div class="form-row">
                                     <div class="form-group">
                                         <label>Last Updation Date:</label>
-                                        <p><?php echo htmlentities($result->UpdationDate); ?></p>
+                                        <p><?php echo htmlentities($result->UpdationDate ? $result->UpdationDate : "N/A"); ?></p>
                                     </div>
-                                <?php } ?>
-
-                                <div class="form-group">
-                                    <label>Profile Status:</label>
-                                    <?php if ($result->Status == 1) { ?>
-                                        <span class="status-active">Active</span>
-                                    <?php } else { ?>
-                                        <span class="status-blocked">Blocked</span>
-                                    <?php } ?>
+                                    <div class="form-group">
+                                        <label>Profile Status:</label>
+                                        <?php if ($result->Status == 1) { ?>
+                                            <span class="status-active">Active</span>
+                                        <?php } else { ?>
+                                            <span class="status-blocked">Blocked</span>
+                                        <?php } ?>
+                                    </div>
                                 </div>
 
                                 <div class="form-group">
@@ -194,11 +178,8 @@ if(strlen($_SESSION['login'])==0) {
             </div>
         </div>
     </div>
-    <!-- CONTENT-WRAPPER SECTION END-->
     <script src="assets/js/jquery-1.10.2.js"></script>
-    <!-- BOOTSTRAP SCRIPTS  -->
     <script src="assets/js/bootstrap.js"></script>
-    <!-- CUSTOM SCRIPTS  -->
     <script src="assets/js/custom.js"></script>
 </body>
 </html>
